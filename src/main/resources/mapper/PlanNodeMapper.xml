@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wqy.eureka.provider.dao.PlanNodeMapper" >
+  <resultMap id="BaseResultMap" type="cn.wqy.eureka.provider.entity.PlanNode" >
+    <id column="node_id" property="nodeId" jdbcType="VARCHAR" />
+    <result column="CREATED_USER" property="createdUser" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_BY" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="habit_id" property="habitId" jdbcType="VARCHAR" />
+    <result column="node_name" property="nodeName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="node_status" property="nodeStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+      <![CDATA[
+      node_id , CREATED_USER, created_time, UPDATED_BY, updated_time, habit_id, node_name, parent_id, node_status
+      ]]>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_node
+    where node_id = #{nodeId,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from plan_node
+    <include refid="BaseCondition"/>
+    <if test="sort!=null and order!=null">
+      order by ${sort} ${order}
+    </if>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from plan_node
+    where node_id = #{nodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.wqy.eureka.provider.entity.PlanNode" >
+    insert into plan_node (node_id, CREATED_USER, created_time, 
+      UPDATED_BY, updated_time, habit_id, 
+      node_name, parent_id, node_status
+      )
+    values (#{nodeId,jdbcType=VARCHAR}, #{createdUser,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{habitId,jdbcType=VARCHAR}, 
+      #{nodeName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{nodeStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wqy.eureka.provider.entity.PlanNode" >
+    insert into plan_node
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="createdUser != null" >
+        CREATED_USER,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+      <if test="habitId != null" >
+        habit_id,
+      </if>
+      <if test="nodeName != null" >
+        node_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="nodeStatus != null" >
+        node_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null" >
+        #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="habitId != null" >
+        #{habitId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null" >
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeStatus != null" >
+        #{nodeStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wqy.eureka.provider.entity.PlanNode" >
+    update plan_node
+    <set >
+      <if test="createdUser != null" >
+        CREATED_USER = #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="habitId != null" >
+        habit_id = #{habitId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null" >
+        node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeStatus != null" >
+        node_status = #{nodeStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where node_id = #{nodeId,jdbcType=VARCHAR}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="cn.wqy.eureka.provider.entity.PlanNode" >
+    update plan_node
+    set CREATED_USER = #{createdUser,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      habit_id = #{habitId,jdbcType=VARCHAR},
+      node_name = #{nodeName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      node_status = #{nodeStatus,jdbcType=VARCHAR}
+    where node_id = #{nodeId,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="BaseCondition">
+        <where>
+            <if test="nodeId!=null and nodeId!='' ">
+                and node_id=#{nodeId,jdbcType=VARCHAR}
+            </if>
+            <if test="nodeStatus!=null and nodeStatus!='' ">
+                and nodeStatus=#{nodeStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="nodeName!=null and nodeName!='' ">
+                and node_name like '%' || #{nodeName,jdbcType=VARCHAR} || '%'
+            </if>
+        </where>
+    </sql>
+
+</mapper>

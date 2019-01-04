@@ -18,6 +18,7 @@
     user_id, user_name, created_time, updated_time, login_id, pwd, wallet, signature, 
     level, open_id, wx_id
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
