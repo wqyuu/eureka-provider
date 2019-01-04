@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/user")
-@Api(value = "eureka-provider", description = "学生查询接口")
+@Api(value = "eureka-provider", description = "账号查询接口")
 public class UserConteroller {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserConteroller.class);
 
