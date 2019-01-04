@@ -56,6 +56,19 @@ mybatis:
   # 开启驼峰匹配
   mapUnderscoreToCamelCase: true
 
+# 通用 Mapper 配置
+#mapper:
+#  mappers: cn.wqy.eureka.provider.dao.BaseMybatisDao
+#  not-empty: false
+#  identity: MYSQL
+
+# 分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params:
+    count: countSql
 ---
 #开发环境配置
 server:
