@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wqy.eureka.provider.dao.PlanRemindMapper" >
+  <resultMap id="BaseResultMap" type="cn.wqy.eureka.provider.entity.PlanRemind" >
+    <id column="remind_id" property="remindId" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_BY" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="remind_status" property="remindStatus" jdbcType="VARCHAR" />
+    <result column="remind_time" property="remindTime" jdbcType="TIMESTAMP" />
+    <result column="remind_num" property="remindNum" jdbcType="INTEGER" />
+    <result column="node_id" property="nodeId" jdbcType="VARCHAR" />
+    <result column="habit_id" property="habitId" jdbcType="VARCHAR" />
+    <result column="remind_message" property="remindMessage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    remind_id, CREATED_BY, created_time, UPDATED_BY, updated_time, remind_status, remind_time,
+    remind_num, node_id, habit_id, remind_message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from plan_remind
+    where remind_id = #{remindId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="select" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from plan_remind
+      <include refid="BaseContion"/>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from plan_remind
+    where remind_id = #{remindId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.wqy.eureka.provider.entity.PlanRemind" >
+    insert into plan_remind (remind_id, CREATED_BY, created_time,
+      UPDATED_BY, updated_time, remind_status,
+      remind_time, remind_num, node_id,
+      habit_id, remind_message)
+    values (#{remindId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP},
+      #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{remindStatus,jdbcType=VARCHAR},
+      #{remindTime,jdbcType=TIMESTAMP}, #{remindNum,jdbcType=INTEGER}, #{nodeId,jdbcType=VARCHAR},
+      #{habitId,jdbcType=VARCHAR}, #{remindMessage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wqy.eureka.provider.entity.PlanRemind" >
+    insert into plan_remind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="remindId != null" >
+        remind_id,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null" >
+        updated_time,
+      </if>
+      <if test="remindStatus != null" >
+        remind_status,
+      </if>
+      <if test="remindTime != null" >
+        remind_time,
+      </if>
+      <if test="remindNum != null" >
+        remind_num,
+      </if>
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="habitId != null" >
+        habit_id,
+      </if>
+      <if test="remindMessage != null" >
+        remind_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="remindId != null" >
+        #{remindId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindStatus != null" >
+        #{remindStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remindTime != null" >
+        #{remindTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindNum != null" >
+        #{remindNum,jdbcType=INTEGER},
+      </if>
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="habitId != null" >
+        #{habitId,jdbcType=VARCHAR},
+      </if>
+      <if test="remindMessage != null" >
+        #{remindMessage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wqy.eureka.provider.entity.PlanRemind" >
+    update plan_remind
+    <set >
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null" >
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindStatus != null" >
+        remind_status = #{remindStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remindTime != null" >
+        remind_time = #{remindTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remindNum != null" >
+        remind_num = #{remindNum,jdbcType=INTEGER},
+      </if>
+      <if test="nodeId != null" >
+        node_id = #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="habitId != null" >
+        habit_id = #{habitId,jdbcType=VARCHAR},
+      </if>
+      <if test="remindMessage != null" >
+        remind_message = #{remindMessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where remind_id = #{remindId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wqy.eureka.provider.entity.PlanRemind" >
+    update plan_remind
+    set CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      remind_status = #{remindStatus,jdbcType=VARCHAR},
+      remind_time = #{remindTime,jdbcType=TIMESTAMP},
+      remind_num = #{remindNum,jdbcType=INTEGER},
+      node_id = #{nodeId,jdbcType=VARCHAR},
+      habit_id = #{habitId,jdbcType=VARCHAR},
+      remind_message = #{remindMessage,jdbcType=VARCHAR}
+    where remind_id = #{remindId,jdbcType=VARCHAR}
+  </update>
+
+
+
+    <sql id="BaseContion">
+        <where>
+            <if test="habitId !=null and habitId !=''">
+              and habit_id= #{habitId,jdbcType=VARCHAR}
+            </if>
+            <if test="nodeId !=null and nodeId !=''">
+                and node_id= #{nodeId,jdbcType=VARCHAR}
+            </if>
+            <if test="remindId !=null and remindId !=''">
+                and remind_id= #{remindId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+</mapper>
