@@ -22,16 +22,31 @@ public class HabitController {
 
     /**
      * 新增计划
-     * @param habit
+     * @param habitName
      * @return
      */
     @PostMapping(value = "/add")
-    public int addHabit(@ApiParam(value = "计划名称") @RequestParam(value = "habitName",required = false) String habitName,
-                        @ApiParam(value = "描述") @RequestParam(value = "habitDesc",required = false) String habitDesc,
-                        @ApiParam(value = "重要程度") @RequestParam(value = "habitImportance",required = false) String habitImportance,
-                        @ApiParam(value = "期限") @RequestParam(value = "habitTerm",required = false) String habitTerm,
-                        PlanHabit habit){
+    public int addHabit(
+            @ApiParam(value = "计划名称") @RequestParam(value = "habitName",required = false) String habitName,
+            @ApiParam(value = "描述") @RequestParam(value = "habitDesc",required = false) String habitDesc,
+            @ApiParam(value = "重要程度") @RequestParam(value = "habitImportance",required = false) String habitImportance,
+            @ApiParam(value = "期限") @RequestParam(value = "habitTerm",required = false) String habitTerm
+            ){
+
+        PlanHabit habit=new PlanHabit();
         habit.setHabitId(UUID.randomUUID().toString());
+        if(!Stringer.isNullOrEmpty(habitName)){
+            habit.setHabitName(habitName);
+        }
+        if(!Stringer.isNullOrEmpty(habitDesc)){
+            habit.setHabitDesc(habitDesc);
+        }
+        if(!Stringer.isNullOrEmpty(habitImportance)){
+            habit.setHabitImportance(habitImportance);
+        }
+        if(!Stringer.isNullOrEmpty(habitTerm)){
+            habit.setHabitTerm(habitTerm);
+        }
         return habitService.insertSelective(habit);
     }
 
@@ -41,14 +56,30 @@ public class HabitController {
             @ApiParam(value = "描述") @RequestParam(value = "habitDesc",required = false) String habitDesc,
             @ApiParam(value = "重要程度") @RequestParam(value = "habitImportance",required = false) String habitImportance,
             @ApiParam(value = "期限") @RequestParam(value = "habitTerm",required = false) String habitTerm,
-            PlanHabit habit){
+            @ApiParam(value = "计划ID") @RequestParam(value = "habitId",required = false) String habitId){
+
+        PlanHabit habit=new PlanHabit();
+        habit.setHabitId(habitId);
+        if(!Stringer.isNullOrEmpty(habitName)){
+            habit.setHabitName(habitName);
+        }
+        if(!Stringer.isNullOrEmpty(habitDesc)){
+            habit.setHabitDesc(habitDesc);
+        }
+        if(!Stringer.isNullOrEmpty(habitImportance)){
+            habit.setHabitImportance(habitImportance);
+        }
+        if(!Stringer.isNullOrEmpty(habitTerm)){
+            habit.setHabitTerm(habitTerm);
+        }
         return habitService.updateByPrimaryKeySelective(habit);
     }
 
     @GetMapping(value = "/delete")
     public int deleteHabit(
-            @ApiParam(value = "计划名称") @RequestParam(value = "habitId",required = false) String habitId,
-            PlanHabit habit){
+            @ApiParam(value = "计划ID") @RequestParam(value = "habitId",required = false) String habitId){
+        PlanHabit habit=new PlanHabit();
+        habit.setHabitId(habitId);
         return habitService.deleteByPrimaryKey(habit);
     }
 
