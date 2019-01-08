@@ -176,7 +176,7 @@
      and habit_term = #{habitTerm,jdbcType=VARCHAR}
     </if>
     <if test="habitName != null and habitName !='' " >
-     and habit_name like '%' || #{habitName,jdbcType=VARCHAR} || '%'
+     and habit_name like concat('%', #{habitName,jdbcType=VARCHAR} , '%')
     </if>
     <if test="habitStaus != null" >
       and habit_staus = #{habitStaus,jdbcType=VARCHAR}

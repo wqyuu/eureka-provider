@@ -161,11 +161,17 @@
             <if test="nodeId!=null and nodeId!='' ">
                 and node_id=#{nodeId,jdbcType=VARCHAR}
             </if>
-            <if test="nodeStatus!=null and nodeStatus!='' ">
-                and nodeStatus=#{nodeStatus,jdbcType=VARCHAR}
-            </if>
             <if test="nodeName!=null and nodeName!='' ">
-                and node_name like '%' || #{nodeName,jdbcType=VARCHAR} || '%'
+              and node_name like CONCAT('%',#{nodeName,jdbcType=VARCHAR} ,'%')
+            </if>
+            <if test="nodeStatus!=null and nodeStatus!='' ">
+                and node_status=#{nodeStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="habitId!=null and habitId!='' ">
+                and habit_id= #{habitId,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId!=null and parentId!='' ">
+              and parent_id=#{parentId,jdbcType=VARCHAR}
             </if>
         </where>
     </sql>
