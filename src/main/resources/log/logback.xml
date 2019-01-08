@@ -171,11 +171,11 @@
 
     <logger name="org.springframework.web" level="info"/>
     <logger name="org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor" level="INFO"/>
-    <logger name="cn.zhangbox.eureka.provider" level="debug"/>
+    <logger name="cn.wqy.eureka.provider" level="debug"/>
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <root level="info">
+        <root level="debug">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="DEBUG_FILE"/>
             <appender-ref ref="INFO_FILE"/>

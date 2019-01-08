@@ -58,7 +58,7 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
 
-        <table  tableName="plan_user" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        <table  tableName="plan_remind" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"/>
 
         <!-- 有些表的字段需要指定java类型
