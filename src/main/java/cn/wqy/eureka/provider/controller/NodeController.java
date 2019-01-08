@@ -23,39 +23,60 @@ public class NodeController {
 
     /**
      * 新增节点
-     * @param node
-     * @return
      */
     @PostMapping(value = "/add")
-    public int addNode(@ApiParam(value = "节点名称") @RequestParam(value = "nodeName",required = false) String nodeName,
+    public int addNode(@ApiParam(value = "节点名称") @RequestParam(value = "node_name",required = false) String nodeName,
                         @ApiParam(value = "计划ID") @RequestParam(value = "habitId",required = false) String habitId,
-                        @ApiParam(value = "父节点ID") @RequestParam(value = "parentId",required = false) String parentId,
-                        PlanNode node){
+                        @ApiParam(value = "父节点ID") @RequestParam(value = "parentId",required = false) String parentId){
+
+        PlanNode node=new PlanNode();
+        if(!Stringer.isNullOrEmpty(nodeName)){
+            node.setNodeName(nodeName);
+        }
+        if(!Stringer.isNullOrEmpty(habitId)){
+            node.setHabitId(habitId);
+        }
+        if(!Stringer.isNullOrEmpty(parentId)){
+            node.setParentId(parentId);
+        }
+
         node.setNodeId(UUID.randomUUID().toString());
         return nodeService.insertSelective(node);
     }
 
     @PostMapping(value = "/update")
     public int updateNode(
-            @ApiParam(value = "节点名称") @RequestParam(value = "nodeName",required = false) String nodeName,
+            @ApiParam(value = "节点名称") @RequestParam(value = "node_name",required = false) String nodeName,
             @ApiParam(value = "计划ID") @RequestParam(value = "habitId",required = false) String habitId,
             @ApiParam(value = "节点ID") @RequestParam(value = "nodeId",required = false) String nodeId,
-            @ApiParam(value = "父节点ID") @RequestParam(value = "parentId",required = false) String parentId,
-            PlanNode node){
+            @ApiParam(value = "父节点ID") @RequestParam(value = "parentId",required = false) String parentId){
+        PlanNode node=new PlanNode();
+        if(!Stringer.isNullOrEmpty(nodeId)){
+            node.setNodeId(nodeId);
+        }
+        if(!Stringer.isNullOrEmpty(nodeName)){
+            node.setNodeName(nodeName);
+        }
+        if(!Stringer.isNullOrEmpty(habitId)){
+            node.setHabitId(habitId);
+        }
+        if(!Stringer.isNullOrEmpty(parentId)){
+            node.setParentId(parentId);
+        }
         return nodeService.updateByPrimaryKeySelective(node);
     }
 
     @GetMapping(value = "/delete")
     public int deleteNode(
-            @ApiParam(value = "节点ID") @RequestParam(value = "nodeId",required = false) String nodeId,
-            PlanNode node){
+            @ApiParam(value = "节点ID") @RequestParam(value = "nodeId",required = false) String nodeId){
+        PlanNode node=nodeService.selectByPrimaryKey(nodeId);
         return nodeService.deleteByPrimaryKey(node);
     }
 
     @RequestMapping(value = "/query")
     @ApiOperation(value = "node query")
     public List<PlanNode> queryNode(
-            @ApiParam(value = "节点名称") @RequestParam(value = "nodeName",required = false) String nodeName,
+            @ApiParam(value = "节点名称") @RequestParam(value = "node_name",required = false) String nodeName,
             @ApiParam(value = "计划ID") @RequestParam(value = "habitId",required = false) String habitId,
             @ApiParam(value = "父节点ID") @RequestParam(value = "parentId",required = false) String parentId,
             Map<String,Object> params){
