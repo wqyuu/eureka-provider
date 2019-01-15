@@ -43,6 +43,8 @@ public class QuartEventDemo implements Job,Serializable{   //只需建立一个�
         noticeDTO.setRemindId(openid);
         noticeDTO.setRemindMessage(eventContent);
         log.info("【传值是否成功】noticeDTO={}",noticeDTO);
+
+        System.out.print("wqy----消息发送！");
         /*pushMessageService.noiteEvent(noticeDTO);
         try {
             pushMessageService.aliyunSms(noticeDTO);
