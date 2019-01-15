@@ -41,11 +41,11 @@ public class QuartzServiceImpl implements QuartzService {
         }
         SimpleTrigger trigger = (SimpleTrigger) TriggerBuilder.newTrigger()
                 .withIdentity("myTrigger",group)
-                .usingJobData("openid",noticeDTO.getRemindId())
-                .usingJobData("createTime",format.format(noticeDTO.getCreatedTime()))
-                .usingJobData("endTime",format.format(noticeDTO.getRemindTime()))
-                .usingJobData("eventContent",noticeDTO.getRemindMessage())
-                .usingJobData("remindMessage",noticeDTO.getRemindMessage())
+                //.usingJobData("openid",noticeDTO.getRemindId())
+                //.usingJobData("createTime",format.format(noticeDTO.getCreatedTime()))
+                //.usingJobData("endTime",format.format(noticeDTO.getRemindTime()))
+                //.usingJobData("eventContent",noticeDTO.getRemindMessage())
+                //.usingJobData("remindMessage",noticeDTO.getRemindMessage())
                 .usingJobData("habitId",noticeDTO.getHabitId())
                 .startAt(date)
                 .build();
